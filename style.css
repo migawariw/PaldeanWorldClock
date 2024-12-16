@@ -32,13 +32,14 @@ label {
     color: #2d3748;
 }
 
-/* #paldeaTimeInput {
+/* #paldeaHoursInput {
     padding: 10px;
-    font-size: 16px;
+    font-size: 40px;
     border: 1px solid #cbd5e0;
     border-radius: 5px;
     margin-bottom: 10px;
-    width: 200px;
+    width: 80px;
+	display: block;
 } */
 /* 入力欄のスタイル */
 #paldeaTimeInput {
@@ -53,7 +54,23 @@ label {
 	display: block;
 	margin-bottom: 20px;
 }
-
+.time-inputs {
+	display: flex;        /* フレックスボックスで横並びにする */
+	align-items: center;  /* 縦方向に中央揃え */
+	gap: 10px;            /* 入力欄とテキストの間に少しスペースを追加 */
+  }
+  
+  /* 入力欄のサイズを大きくする */
+  .time-inputs input {
+	width: 100px;         /* 入力欄の幅を100pxに変更 */
+	height: 40px;         /* 入力欄の高さを40pxに変更 */
+	font-size: 40px;      /* フォントサイズを大きく */
+	padding: 10px;        /* 内側に10pxの余白を追加 */
+	text-align: center;
+	border: 1px solid #cbd5e0;
+    border-radius: 5px;
+  }
+  
 #calculateButton {
     padding: 10px 20px;
     font-size: 16px;
@@ -63,6 +80,7 @@ label {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+	margin-top: 20px;  
 }
 
 #calculateButton:hover {
