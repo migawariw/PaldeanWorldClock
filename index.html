@@ -9,14 +9,17 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>パルデア地方の時刻計算</h1>
-    <label for="paldeaTimeInput">パルデア地方の現在時刻 (HH:MM:SS):</label>
-<input type="text" id="paldeaTimeInput" value="00:00:00"> <!-- テキスト形式に変更 -->
+
+	<label for="paldeaHoursInput">パルデア地方の現在時刻:</label>
+	<div class="time-inputs">
+	  <input type="text" id="paldeaHoursInput"> 時<!-- 時間入力欄 -->
+	  <input type="text" id="paldeaMinutesInput"> 分 <!-- 分入力欄 -->
+	</div>
+	
 
 <button id="calculateButton">計算</button>
 
-    <h2>現在の時刻</h2>
-    <p id="currentTimeDisplay"></p>
+
 
     <h2>パルデア地方の時刻</h2>
     <p id="paldeaTimeDisplay"></p>
@@ -26,5 +29,8 @@
 
     <h2>ブルーベリー学園の時刻</h2>
     <p id="blueberryTimeDisplay"></p>
+
+	<h2>現在の時刻</h2>
+    <p id="currentTimeDisplay"></p>
 </body>
 </html>
