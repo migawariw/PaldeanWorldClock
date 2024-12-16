@@ -1,16 +1,26 @@
-// パルデア地方の時刻を計算する関数
-function calculatePaldeaTime(hh, mm, ss) {
-	const totalSeconds = (hh * 3600) + (mm * 60) + ss; // 入力時刻を秒に変換
-	const paldeaSeconds = totalSeconds; // パルデア時間に変換
+let initialTime = null; // 初期時刻を保持する変数
+let updateIntervalId = null; // タイマーIDを保持する変数
 
-	const paldeaHours = Math.floor(paldeaSeconds / 3600); // 時間
+// 現在時刻を表示する関数
+function updateCurrentTime() {
+	const now = new Date();
+	const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
+	document.getElementById("currentTimeDisplay").textContent = currentTime;
+}
+
+// 時刻を計算する関数
+function calculatePaldeaTime(initialHours, initialMinutes, initialSeconds, elapsedSeconds) {
+	const totalInitialSeconds = (initialHours * 3600) + (initialMinutes * 60) + initialSeconds;
+	const paldeaSeconds = totalInitialSeconds + elapsedSeconds * 20; // 20倍速の時間経過を加算
+
+	const paldeaHours = Math.floor(paldeaSeconds / 3600) % 24; // 時間
 	const paldeaMinutes = Math.floor((paldeaSeconds % 3600) / 60); // 分
 	const paldeaSecondsRemainder = Math.floor(paldeaSeconds % 60); // 秒
 
 	return {
-			hours: paldeaHours,
-			minutes: paldeaMinutes,
-			seconds: paldeaSecondsRemainder
+		hours: paldeaHours,
+		minutes: paldeaMinutes,
+		seconds: paldeaSecondsRemainder
 	};
 }
 
@@ -31,47 +41,44 @@ function displayTimes(paldeaHours, paldeaMinutes, paldeaSeconds) {
 	document.getElementById("blueberryTimeDisplay").textContent = blueberryTime;
 }
 
-let updateIntervalId = null; // タイマーIDを保持する変数
-
 // パルデア地方の時刻をリアルタイムで更新
 function startUpdatingTime(initialHours, initialMinutes, initialSeconds) {
-    let totalPaldeaSeconds = (initialHours * 3600) + (initialMinutes * 60) + initialSeconds;
+	// 現在時刻を初期時刻として記録
+	initialTime = new Date();
 
-    // 既存のタイマーがある場合はクリア
-    if (updateIntervalId !== null) {
-        clearInterval(updateIntervalId);
-    }
+	// 既存のタイマーがある場合はクリア
+	if (updateIntervalId !== null) {
+		clearInterval(updateIntervalId);
+	}
 
-    // 新しいタイマーを開始
-    updateIntervalId = setInterval(() => {
-        totalPaldeaSeconds += 20; // 現実の1秒ごとにパルデア地方の20秒を進める
+	// 新しいタイマーを開始
+	updateIntervalId = setInterval(() => {
+		const now = new Date();
+		const elapsedSeconds = Math.floor((now - initialTime) / 1000); // 経過時間を秒に変換
 
-        const paldeaHours = Math.floor(totalPaldeaSeconds / 3600) % 24;
-        const paldeaMinutes = Math.floor((totalPaldeaSeconds % 3600) / 60);
-        const paldeaSeconds = Math.floor(totalPaldeaSeconds % 60);
-
-        displayTimes(paldeaHours, paldeaMinutes, paldeaSeconds);
-    }, 1000); // 1秒ごとに実行
+		const { hours, minutes, seconds } = calculatePaldeaTime(initialHours, initialMinutes, initialSeconds, elapsedSeconds);
+		displayTimes(hours, minutes, seconds);
+	}, 1000); // 1秒ごとに実行
 }
 
+// 計算ボタンのクリックイベント
 // 計算ボタンのクリックイベント
 document.getElementById("calculateButton").addEventListener("click", () => {
 	const hh = Number(document.getElementById("paldeaHoursInput").value) || 0; // 時間を取得
 	const mm = Number(document.getElementById("paldeaMinutesInput").value) || 0; // 分を取得
 	const ss = 0; // 秒は固定値
 
-	const { hours, minutes, seconds } = calculatePaldeaTime(hh, mm, ss);
-	displayTimes(hours, minutes, seconds);
-	startUpdatingTime(hours, minutes, seconds); // タイマーを開始
+	// 現在時刻を初期時刻として記録
+	initialTime = new Date();
+
+	// 初期時刻をフォーマットして表示
+	const initialTimeString = `${String(initialTime.getHours()).padStart(2, '0')}:${String(initialTime.getMinutes()).padStart(2, '0')}:${String(initialTime.getSeconds()).padStart(2, '0')}`;
+	document.getElementById("initialTimeDisplay").textContent = initialTimeString;
+
+	// 時間の更新を開始
+	startUpdatingTime(hh, mm, ss);
 });
 
-
-// 現在時刻を更新する関数
-function updateCurrentTime() {
-	const now = new Date();
-	const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
-	document.getElementById("currentTimeDisplay").textContent = currentTime;
-}
 
 // 現在時刻を1秒ごとに更新
 setInterval(updateCurrentTime, 1000);
