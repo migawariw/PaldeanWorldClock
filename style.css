@@ -1,0 +1,90 @@
+/* ベーススタイル */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
+	text-align: center;
+}
+
+/* ヘッダー */
+h1 {
+    color: #2d3748;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #4a5568;
+    margin-top: 20px;
+}
+
+/* 入力フォーム */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #2d3748;
+}
+
+/* #paldeaTimeInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 200px;
+} */
+/* 入力欄のスタイル */
+#paldeaTimeInput {
+    padding: 10px;
+    font-size: 40px; /* 文字を大きくする */
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    /* margin-bottom: 10px; */
+    width: 200px;
+	text-align: center;
+	/* margin: 0 auto;  左右のマージンを自動で設定して中央に */
+	display: block;
+	margin-bottom: 20px;
+}
+
+#calculateButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#calculateButton:hover {
+    background-color: #2b6cb0;
+}
+
+/* 表示部分 */
+p {
+    background: #edf2f7;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cbd5e0;
+    width: 200px;
+    text-align: center;
+    font-size: 40px;
+    margin: 5px 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    #paldeaTimeInput, #calculateButton, p {
+        width: 100%;
+        /* font-size: 16px; */
+    }
+}
