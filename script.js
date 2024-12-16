@@ -56,13 +56,15 @@ function startUpdatingTime(initialHours, initialMinutes, initialSeconds) {
 
 // 計算ボタンのクリックイベント
 document.getElementById("calculateButton").addEventListener("click", () => {
-    const inputTime = document.getElementById("paldeaTimeInput").value || "00:00:00"; // 空の場合デフォルト値を使用
-    const [hh, mm, ss] = inputTime.split(":").map(Number);
+	const hh = Number(document.getElementById("paldeaHoursInput").value) || 0; // 時間を取得
+	const mm = Number(document.getElementById("paldeaMinutesInput").value) || 0; // 分を取得
+	const ss = 0; // 秒は固定値
 
-    const { hours, minutes, seconds } = calculatePaldeaTime(hh, mm, ss);
-    displayTimes(hours, minutes, seconds);
-    startUpdatingTime(hours, minutes, seconds); // タイマーを開始
+	const { hours, minutes, seconds } = calculatePaldeaTime(hh, mm, ss);
+	displayTimes(hours, minutes, seconds);
+	startUpdatingTime(hours, minutes, seconds); // タイマーを開始
 });
+
 
 // 現在時刻を更新する関数
 function updateCurrentTime() {
