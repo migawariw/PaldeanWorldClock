@@ -1,7 +1,7 @@
 // パルデア地方の時刻を計算する関数
 function calculatePaldeaTime(hh, mm, ss) {
 	const totalSeconds = (hh * 3600) + (mm * 60) + ss; // 入力時刻を秒に変換
-	const paldeaSeconds = (totalSeconds % (72 * 60)) * 20; // パルデア時間に変換
+	const paldeaSeconds = totalSeconds; // パルデア時間に変換
 
 	const paldeaHours = Math.floor(paldeaSeconds / 3600); // 時間
 	const paldeaMinutes = Math.floor((paldeaSeconds % 3600) / 60); // 分
